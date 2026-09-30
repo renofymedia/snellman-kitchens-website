@@ -55,10 +55,16 @@
   var cio = new IntersectionObserver(function(es){ es.forEach(function(e){
     if (!e.isIntersecting) return; cio.unobserve(e.target);
     var el = e.target, end = parseFloat(el.dataset.count), t0 = null, dur = 1400;
-    function step(t){ if(!t0) t0 = t; var k = Math.min((t-t0)/dur, 1), v = Math.round(end * (1-Math.pow(1-k,3))); el.firstChild.nodeValue = v; if (k<1) requestAnimationFrame(step); }
-    if (reduce){ el.firstChild.nodeValue = end; } else requestAnimationFrame(step);
+    function step(t){ if(!t0) t0 = t; var k = Math.min((t-t0)/dur, 1), v = Math.round(end * (1-Math.pow(1-k,3))); el.textContent = v; if (k<1) requestAnimationFrame(step); }
+    if (reduce){ el.textContent = end; } else requestAnimationFrame(step);
   }); }, {threshold:.5});
-  document.querySelectorAll('.stat .num[data-count]').forEach(function(el){ cio.observe(el); });
+  document.querySelectorAll('.stat [data-count]').forEach(function(el){ cio.observe(el); });
+  /* safety net: never leave a counter stuck at 0 */
+  setTimeout(function(){
+    document.querySelectorAll('.stat [data-count]').forEach(function(el){
+      if (el.textContent.trim() === '0') el.textContent = parseFloat(el.dataset.count);
+    });
+  }, 4000);
 
   /* ---------- marquee duplicate ---------- */
   document.querySelectorAll('.marquee .track').forEach(function(t){ t.innerHTML += t.innerHTML; });
