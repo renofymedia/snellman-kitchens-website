@@ -22,6 +22,11 @@ h1,h2,h3,.serif{font-family:var(--serif);font-weight:500;line-height:1.08;letter
 .sec-head h2{font-size:clamp(2rem,4.4vw,3.3rem);margin-bottom:.8rem}
 .sec-head h2 em{font-style:italic;color:var(--oak-deep)}
 
+.brand img{height:46px;width:auto;display:block}
+.loader-logo{height:72px;width:auto;max-width:80vw}
+.foot-brand img{height:56px;width:auto;max-width:100%}
+@media(max-width:820px){.brand img{height:38px}.loader-logo{height:56px}}
+
 /* ---------- texture / cursor / overlays ---------- */
 .grain{position:fixed;inset:0;z-index:120;pointer-events:none;opacity:.05;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E")}
